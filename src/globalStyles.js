@@ -15,4 +15,7 @@ export const GlobalStyles = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    button, svg, a, li, img {
+        cursor: pointer;
+    }
 `
