@@ -1,0 +1,80 @@
+import styled from 'styled-components'
+import {
+	AiOutlineInstagram,
+	AiOutlineFacebook,
+	AiOutlineTwitter,
+	AiOutlineYoutube
+} from 'react-icons/ai'
+
+const StyledFooter = styled.footer`
+	color: #333333;
+	border-top: 2px solid var(--brandRed);;
+	padding: 2rem 1rem;
+    background-color: #fff;
+	/* padding-top: 3rem; */
+	/* padding-bottom: 1.5rem; */
+    @media (min-width: 1316px) {
+        padding: 2rem 0;
+    }
+	svg {
+		font-size: 2.2rem;
+	}
+    li {
+        margin-bottom: .5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 84%;
+        &:hover {
+            color: red;
+        }
+    }
+    #wrapper {
+        max-width: var(--maxWidth);;
+        margin: 0 auto;
+    }
+`
+const Footer = () => {
+	const socials = [
+		<AiOutlineInstagram />,
+		<AiOutlineFacebook />,
+		<AiOutlineTwitter />,
+		<AiOutlineYoutube />
+	]
+	const links1 = [ 'menu', 'connect', 'specials', 'locations' ]
+	const links2 = [ 'buy gift card', 'check gift card balance', 'webstore' ]
+	const links3 = [ 'history', 'news', 'careers', 'franchising' ]
+	const links4 = [ 'franchising intranet', 'investors' ]
+	return (
+		<StyledFooter className="text-sm md:text-base">
+			<div id="wrapper">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <ul>{links1.map((link, i) => <li key={i}>{link}</li>)}</ul>
+                    <ul>{links2.map((link, i) => <li key={i}>{link}</li>)}</ul>
+                    <ul>{links3.map((link, i) => <li key={i}>{link}</li>)}</ul>
+                    <ul>{links4.map((link, i) => <li key={i}>{link}</li>)}</ul>
+                </div>
+                <div className="flex justify-between px-4 xl:px-0 xl:justify-center py-12 max-w-lg xl:max-w-full xl:gap-16">
+                    {socials.map((social, i) => (
+                        <div
+                            key={i}
+                            className="h-16 w-16 flex items-center justify-center rounded-full text-white bg-brandRed  lg:scale-110 transform"
+                        >
+                            {social}
+                        </div>
+                    ))}
+                </div>
+                <div>
+                    <ul className="flex whitespace-nowrap flex-wrap grid-cols-2 px-12 gap-x-3 xl:gap-x-6 justify-center">
+                        <li>terms of use</li>
+                        <li>privacy policy</li>
+                        <li>don't sell my info</li>
+                    </ul>
+                </div>
+                <p className="pt-8 text-xs text-center">
+                    &copy; 2021 SuperVision Design for Del Taco Inc.
+                </p>
+            </div>
+		</StyledFooter>
+	)
+}
+export default Footer

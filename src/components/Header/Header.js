@@ -2,14 +2,21 @@ import { useState, useRef } from 'react'
 import styled from 'styled-components'
 import logo from '../../assets/logo.png'
 import { GiKnifeFork, GiTacos } from 'react-icons/gi'
-import { FaLocationArrow } from 'react-icons/fa'
+import { IoLocationSharp } from 'react-icons/io5'
 import { WiWindy } from 'react-icons/wi'
 import './Burger/burger.css'
 import useOnClickOutside from 'use-onclickoutside'
 const StyledHeader = styled.div`
-	box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+	height: 72px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	/* border-bottom: 1px solid lightgray; */
+	background-color: #fff;
+	width: 100%;
 	#wrapper {
-		height: 66px;
+		height: 72px;
 		background-color: white;
 		color: #333;
 		display: flex;
@@ -17,14 +24,25 @@ const StyledHeader = styled.div`
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 1rem;
+		gap: 1rem;
+		position: fixed;
+		z-index: 100;
+		top: 0;
+		left: 0;
+		width: 100%;
+		max-width: var(--maxWidth);
 		@media (min-width: 1280px) {
-			padding: 0 2rem;
+			/* padding: 0 2rem; */
 			justify-content: flex-start;
 			gap: 2rem;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		@media (min-width: 1316px) {
+			padding: 0;
 		}
 		svg {
 			font-size: 2.2rem;
-			color: black;
 		}
 		> div {
 			display: flex;
@@ -35,14 +53,43 @@ const StyledHeader = styled.div`
 			margin-right: -1rem;
 			margin-left: -.9rem;
 			#menu {
-				position: absolute;
+				position: fixed;
 				right: 0;
-				left: 0;
-				top: ${(props) => (props.open ? '66px' : '-100%')};
+				top: 72px;
+				left: ${(props) => (props.open ? '0' : '-100%')};
+				max-width: 100%;
 				border-bottom: 1px solid gray;
-				transition: top 250ms;
+				transition: left .25s;
+				transition-delay: .25s;
 				background-color: #fff;
-				z-index: -1;
+				z-index: -10;
+				color: #333;
+				overflow-y: scroll;
+				height: min-content;
+				border-bottom: 1px solid lightgray;
+				.listItem {
+					opacity: .9;
+					/* border: 2px solid red; */
+					width: 100%;
+					text-align: center;
+					padding: 1rem;
+					border-radius: 4px;
+					&:hover {
+						background-color: var(--brandRed);
+						color: white;
+					}
+				}
+			}
+			#overlay {
+				position: fixed;
+				top: 72px;
+				left: ${(props) => (props.open ? '0' : '-100%')};
+				width: 100%;
+				height: 100vh;
+				background-color: rgba(0, 0, 0, .6);
+				z-index: -100;
+				opacity: ${(props) => (props.open ? 1 : 0)};
+				transition: opacity .25s;
 			}
 		}
 		#ahead {
@@ -50,12 +97,12 @@ const StyledHeader = styled.div`
 			text-align: center;
 			text-transform: uppercase;
 			font-size: 80%;
-			font-weight: bold;
+			font-weight: 800;
 
 			padding: 3px;
-			background-color: red;
+			/* background-color: red; */
 			color: white;
-
+			line-height: 1.4;
 			display: flex;
 			align-items: center;
 			cursor: pointer;
@@ -71,6 +118,9 @@ const StyledHeader = styled.div`
 			background-position: center center;
 			height: 100%;
 			width: 110px;
+			@media (min-width: 1280px) {
+				width: 130px;
+			}
 		}
 
 		> div:last-of-type {
@@ -79,7 +129,8 @@ const StyledHeader = styled.div`
 			#knife,
 			#location {
 				svg {
-					font-size: 1.5rem;
+					font-size: 1.7rem;
+					color: #333;
 				}
 			}
 		}
@@ -88,6 +139,8 @@ const StyledHeader = styled.div`
 		background-color: #e82833;
 		color: white;
 		padding: .5rem;
+		width: 100%;
+		margin-top: 72px;
 		svg {
 			font-size: 2rem;
 		}
@@ -120,41 +173,58 @@ const Header = () => {
 			<div id="wrapper">
 				<div id="logo" />
 				<div className="xl:w-full">
-					<div className="hidden  w-full md:grid xl:flex items-center xl:justify-between uppercase text-sm lg:text-base xl:text-lg">
+					<div className="hidden  w-full md:grid xl:flex items-center xl:justify-between uppercase text-sm lg:text-base xl:text-lg xl:gap-4">
 						<ul className="flex gap-5 justify-end capitalize text-brandRed font-medium text-sm xl:order-2">
-							{topLinks.map((link, i) => <li key={i}>{link}</li>)}
+							{topLinks.map((link, i) => (
+								<li key={i} className="whitespace-nowrap hover:underline">
+									{link}
+								</li>
+							))}
 						</ul>
 						<ul className="flex gap-5 xl:gap-8 font-bold">
 							{bottomLinks.map((link, i) => (
-								<li key={i} className="tracking-wide opacity-90">
+								<li
+									key={i}
+									className="tracking-wide opacity-90 hover:text-brandRed"
+								>
 									{link}
 								</li>
 							))}
 						</ul>
 					</div>
-					<div id="ahead">order ahead or delivery</div>
+					<div id="ahead" className="bg-brandRed">
+						order ahead or delivery
+					</div>
 					<div id="knife" className="md:hidden">
 						<GiKnifeFork />
 					</div>
 					<div id="location" className="md:hidden">
-						<FaLocationArrow />
+						<IoLocationSharp />
 					</div>
 					<div id="burger" className="md:hidden" ref={menuRef}>
-						
 						<div id="nav-icon1" onClick={handleOpen}>
 							<span />
 							<span />
 							<span />
 						</div>
 
-						<div id="menu" className="pt-8 pb-4 px-12">
-							<ul className="flex flex-col items-center justify-center uppercase font-bold gap-4">
-								{bottomLinks.map((link, i) => <li key={i}>{link}</li>)}
+						<div id="menu" className="pt-6 pb-5 px-12">
+							<ul className="flex flex-col items-center justify-center uppercase font-bold">
+								{bottomLinks.map((link, i) => (
+									<li key={i} className="listItem">
+										{link}
+									</li>
+								))}
 							</ul>
-							<ul className="flex items-center justify-between capitalize text-brandRed font-medium text-sm mt-6">
-								{topLinks.map((link, i) => <li key={i}>{link}</li>)}
+							<ul className="flex items-center justify-between capitalize  mx-6 text-brandRed font-medium text-sm mt-6">
+								{topLinks.map((link, i) => (
+									<li key={i} className="hover:underline">
+										{link}
+									</li>
+								))}
 							</ul>
 						</div>
+						<div id="overlay" onClick={handleClose} />
 					</div>
 				</div>
 			</div>
