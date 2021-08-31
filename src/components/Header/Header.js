@@ -6,15 +6,21 @@ import { IoLocationSharp } from 'react-icons/io5'
 import { WiWindy } from 'react-icons/wi'
 import './Burger/burger.css'
 import useOnClickOutside from 'use-onclickoutside'
+import Headroom from 'react-headroom'
+
 const StyledHeader = styled.div`
 	height: 72px;
-	position: fixed;
+	/* position: fixed; */
 	top: 0;
 	left: 0;
-	z-index: 100;
+	/* z-index: 100; */
 	/* border-bottom: 1px solid lightgray; */
 	background-color: #fff;
 	width: 100%;
+	transition: transform .5s;
+	@media (min-width: 768px) {
+		height: 120px;
+	}
 	#wrapper {
 		height: 72px;
 		background-color: white;
@@ -54,21 +60,21 @@ const StyledHeader = styled.div`
 			margin-left: -.9rem;
 			#menu {
 				position: fixed;
-				right: 0;
+				width: 100%;
 				top: 72px;
-				left: ${(props) => (props.open ? '0' : '-100%')};
+				right: ${(props) => (props.open ? '0' : '-100%')};
 				max-width: 100%;
 				border-bottom: 1px solid gray;
-				transition: left .25s;
+				transition: right .25s;
 				transition-delay: .25s;
 				background-color: #fff;
 				z-index: -10;
-				color: #333;
+				color: var(--muted);
 				overflow-y: scroll;
 				height: min-content;
 				border-bottom: 1px solid lightgray;
 				.listItem {
-					opacity: .9;
+					/* opacity: .9; */
 					/* border: 2px solid red; */
 					width: 100%;
 					text-align: center;
@@ -130,7 +136,8 @@ const StyledHeader = styled.div`
 			#location {
 				svg {
 					font-size: 1.7rem;
-					color: #333;
+					color: var(--icon);
+					opacity: .9;
 				}
 			}
 		}
@@ -140,7 +147,10 @@ const StyledHeader = styled.div`
 		color: white;
 		padding: .5rem;
 		width: 100%;
-		margin-top: 72px;
+		position: fixed;
+		top: 72px;
+		z-index: 200;
+		/* margin-top: 72px; */
 		svg {
 			font-size: 2rem;
 		}
@@ -150,10 +160,12 @@ const Header = () => {
 	const [ isOpen, setIsOpen ] = useState(false)
 	const handleOpen = () => {
 		document.getElementById('nav-icon1').classList.toggle('open')
+		document.body.classList.toggle('modal-open')
 		setIsOpen(!isOpen)
 	}
 	const handleClose = () => {
 		document.getElementById('nav-icon1').classList.remove('open')
+		document.body.classList.remove('modal-open')
 		setIsOpen(false)
 	}
 	const topLinks = [ 'gift cards', 'contact us', 'COVID safety' ]
@@ -168,76 +180,85 @@ const Header = () => {
 	]
 	const menuRef = useRef()
 	useOnClickOutside(menuRef, handleClose)
-	return (
-		<StyledHeader open={isOpen}>
-			<div id="wrapper">
-				<div id="logo" />
-				<div className="xl:w-full">
-					<div className="hidden  w-full md:grid xl:flex items-center xl:justify-between uppercase text-sm lg:text-base xl:text-lg xl:gap-4">
-						<ul className="flex gap-5 justify-end capitalize text-brandRed font-medium text-sm xl:order-2">
-							{topLinks.map((link, i) => (
-								<li key={i} className="whitespace-nowrap hover:underline">
-									{link}
-								</li>
-							))}
-						</ul>
-						<ul className="flex gap-5 xl:gap-8 font-bold">
-							{bottomLinks.map((link, i) => (
-								<li
-									key={i}
-									className="tracking-wide opacity-90 hover:text-brandRed"
-								>
-									{link}
-								</li>
-							))}
-						</ul>
-					</div>
-					<div id="ahead" className="bg-brandRed">
-						order ahead or delivery
-					</div>
-					<div id="knife" className="md:hidden">
-						<GiKnifeFork />
-					</div>
-					<div id="location" className="md:hidden">
-						<IoLocationSharp />
-					</div>
-					<div id="burger" className="md:hidden" ref={menuRef}>
-						<div id="nav-icon1" onClick={handleOpen}>
-							<span />
-							<span />
-							<span />
-						</div>
 
-						<div id="menu" className="pt-6 pb-5 px-12">
-							<ul className="flex flex-col items-center justify-center uppercase font-bold">
-								{bottomLinks.map((link, i) => (
-									<li key={i} className="listItem">
+	const headerRef = useRef()
+	const handlePin = () => {
+		headerRef.current.style.transform = 'translateY(0%)'
+	}
+	const handleUnpin = () => {
+		headerRef.current.style.transform = 'translateY(-100%)'
+	}
+	return (
+		<Headroom onPin={handlePin} onUnpin={handleUnpin}>
+			<StyledHeader open={isOpen} ref={headerRef}>
+				<div id="wrapper">
+					<div id="logo" />
+					<div className="xl:w-full">
+						<div className="hidden  w-full md:grid xl:flex items-center xl:justify-between uppercase text-sm lg:text-base xl:text-base xl:gap-4">
+							<ul className="flex gap-5 justify-end capitalize text-brandRed font-medium text-sm xl:order-2">
+								{topLinks.map((link, i) => (
+									<li key={i} className="whitespace-nowrap hover:underline">
 										{link}
 									</li>
 								))}
 							</ul>
-							<ul className="flex items-center justify-between capitalize  mx-6 text-brandRed font-medium text-sm mt-6">
-								{topLinks.map((link, i) => (
-									<li key={i} className="hover:underline">
+							<ul className="flex gap-5 xl:gap-8 font-bold">
+								{bottomLinks.map((link, i) => (
+									<li
+										key={i}
+										className="tracking-wide opacity-90 hover:text-brandRed"
+									>
 										{link}
 									</li>
 								))}
 							</ul>
 						</div>
-						<div id="overlay" onClick={handleClose} />
+						<div id="ahead" className="bg-brandRed">
+							order ahead or delivery
+						</div>
+						<div id="knife" className="md:hidden">
+							<GiKnifeFork />
+						</div>
+						<div id="location" className="md:hidden">
+							<IoLocationSharp />
+						</div>
+						<div id="burger" className="md:hidden" ref={menuRef}>
+							<div id="nav-icon1" onClick={handleOpen}>
+								<span />
+								<span />
+								<span />
+							</div>
+							<div id="menu" className="pt-6 pb-5 px-12">
+								<ul className="flex flex-col items-center justify-center uppercase font-bold">
+									{bottomLinks.map((link, i) => (
+										<li key={i} className="listItem">
+											{link}
+										</li>
+									))}
+								</ul>
+								<ul className="flex items-center justify-between capitalize  mx-6 text-brandRed font-medium text-sm mt-6">
+									{topLinks.map((link, i) => (
+										<li key={i} className="hover:underline">
+											{link}
+										</li>
+									))}
+								</ul>
+							</div>
+							<div id="overlay" onClick={handleClose} />
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="orderAhead" className="hidden md:flex justify-center gap-2">
-				<div className="flex">
-					<WiWindy />
-					<GiTacos />
+				<div id="orderAhead" className="hidden md:flex justify-center gap-2">
+					<div className="flex">
+						<WiWindy />
+						<GiTacos />
+					</div>
+					<div className="bg-white rounded flex items-center text-brandRed font-bold px-4 uppercase">
+						<span>order ahead or delivery</span>
+					</div>
 				</div>
-				<div className="bg-white rounded flex items-center text-brandRed font-bold px-4 uppercase">
-					<span>order ahead or delivery</span>
-				</div>
-			</div>
-		</StyledHeader>
+			</StyledHeader>
+		</Headroom>
 	)
 }
 export default Header

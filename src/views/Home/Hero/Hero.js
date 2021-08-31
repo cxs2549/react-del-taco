@@ -7,8 +7,10 @@ const StyledHero = styled.div`
     background-size: cover;
     background-position: center center;
     display: grid;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         height: calc(100vh - 120px);
         padding: 1rem 2rem;
         grid-template-columns: 1fr 1fr;
@@ -16,6 +18,7 @@ const StyledHero = styled.div`
     }
     img {
         object-fit: cover;
+        padding: 0 1rem;
     }
 `
 const Hero = (props) => {

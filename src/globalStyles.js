@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     :root {
         --brandRed: #E82833;
         --maxWidth: 1300px;
+        --icon: rgb(95, 99, 104);
     }
 
     body {
@@ -19,14 +20,15 @@ export const GlobalStyles = createGlobalStyle`
         sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        background-color: var(--brandRed);
     }
-    main {
-        margin-top: 72px;
-        @media (min-width: 768px) {
-            margin-top: 120px;
-        }
-    }
+   
+
     button, svg, a, li, img {
         cursor: pointer;
+    }
+    .modal-open {
+        overflow: hidden;
     }
 `
