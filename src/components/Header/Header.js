@@ -18,6 +18,8 @@ const StyledHeader = styled.div`
 	background-color: #fff;
 	width: 100%;
 	transition: transform .5s;
+	position: relative;
+	z-index: 1000;
 	@media (min-width: 768px) {
 		height: 120px;
 	}
@@ -68,7 +70,7 @@ const StyledHeader = styled.div`
 				transition: right .25s;
 				transition-delay: .25s;
 				background-color: #fff;
-				z-index: -10;
+				z-index: 1000;
 				color: var(--muted);
 				overflow-y: scroll;
 				height: min-content;

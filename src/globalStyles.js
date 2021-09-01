@@ -31,4 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     .modal-open {
         overflow: hidden;
     }
+    .indicators {
+		
+	}
 `
