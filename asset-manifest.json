@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-del-taco/static/css/main.87ec8b08.chunk.css",
-    "main.js": "/react-del-taco/static/js/main.3146e265.chunk.js",
-    "main.js.map": "/react-del-taco/static/js/main.3146e265.chunk.js.map",
+    "main.js": "/react-del-taco/static/js/main.9c9152c0.chunk.js",
+    "main.js.map": "/react-del-taco/static/js/main.9c9152c0.chunk.js.map",
     "runtime-main.js": "/react-del-taco/static/js/runtime-main.509133bb.js",
     "runtime-main.js.map": "/react-del-taco/static/js/runtime-main.509133bb.js.map",
     "static/css/2.52370392.chunk.css": "/react-del-taco/static/css/2.52370392.chunk.css",
@@ -28,6 +28,6 @@
     "static/css/2.52370392.chunk.css",
     "static/js/2.d218f06a.chunk.js",
     "static/css/main.87ec8b08.chunk.css",
-    "static/js/main.3146e265.chunk.js"
+    "static/js/main.9c9152c0.chunk.js"
   ]
 }
