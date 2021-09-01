@@ -30,6 +30,7 @@ const StyledOptions = styled.div`
 		}
 		@media (min-width: 1280px) {
 			font-size: 260%;
+			text-align: center;
 		}
 	}
 	#table {
