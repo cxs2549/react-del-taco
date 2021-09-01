@@ -12,6 +12,8 @@ import Options from './Options/Options'
 import 'react-slideshow-image/dist/styles.css'
 import { Fade } from 'react-slideshow-image'
 
+import {GrFormPrevious, GrFormNext} from 'react-icons/gr'
+
 const StyledHome = styled.div`
 	background-color: #fff;
 	position: relative;
@@ -21,19 +23,45 @@ const StyledHome = styled.div`
 		position: relative;
 		z-index: 100;
 	}
+
+	.react-slideshow-container .nav {
+		svg {
+			color: red;
+		}
+	}
+
+	
 `
+
+const properties = {
+	duration: 5000,
+	transitionDuration: 500,
+	infinite: true,
+	prevArrow: (
+		<div style={{ fontSize: '50px', marginRight: '-50px' }}>
+			<GrFormPrevious />
+		</div>
+	),
+	nextArrow: (
+		<div style={{ fontSize: '50px', marginLeft: '-50px' }}>
+			<GrFormNext />
+		</div>
+	)
+}
 
 const Home = () => {
 	return (
 		<StyledHome>
-			<Fade indicators>
+			<Fade indicators {...properties}>
 				<Hero bg={cheeseBg}>
-					<img className="max-w-xs lg:max-w-md xl:max-w-lg " src={queso} alt="" />
-					<img className="max-w-md lg:max-w-full md:pb-4" src={cheesetacos} alt="" />
+					<img className=" max-w-xs lg:max-w-md xl:max-w-lg " src={queso} alt="" />
+					<img className=" max-w-xs  lg:max-w-full md:pb-4" src={cheesetacos} alt="" />
 				</Hero>
 				<Hero bg={caramelBg}>
-					<img className="max-w-md md:max-w-xl xl:max-w-3xl " src={sweets} alt="" />
-					<img className="max-w-sm lg:max-w-md xl:max-w-xl " src={caramelText} alt="" />
+					<img className="  max-w-xs lg:max-w-md xl:max-w-xl" src={caramelText} alt="" />
+					<div className="mt-8">
+						<img className="  md:max-w-xl xl:max-w-3xl" src={sweets} alt="" />
+					</div>
 				</Hero>
 			</Fade>
 			<Options />

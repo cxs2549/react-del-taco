@@ -1,20 +1,21 @@
 import styled from 'styled-components'
 
 const StyledHero = styled.div`
-	height: calc(100vh - 72px);
+	height: calc(85vh - 72px);
 	width: 100%;
 	background-image: url(${(props) => props.bg});
 	background-size: cover;
 	background-position: center center;
 	display: flex;
 	flex-flow: column;
-	gap: 2.5rem;
+	gap: 1rem;
 	align-items: center;
 	justify-content: center;
-	padding: 1rem;
+	justify-items: center;
+	/* padding: 0 1rem; */
 	position: relative;
 	@media (min-width: 768px) {
-		height: calc(100vh - 120px);
+		height: calc(90vh - 120px);
 	}
 	@media (min-width: 1024px) {
 		height: calc(90vh - 120px);

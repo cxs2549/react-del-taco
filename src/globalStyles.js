@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
         background-color: var(--brandRed);
+        /* color: red; */
     }
    
 

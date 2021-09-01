@@ -68,7 +68,7 @@ const StyledOptions = styled.div`
 const Options = () => {
 	return (
 		<StyledOptions className="text-gray-800">
-			<h1 className="text-gray-700  text-center mx-auto">
+			<h1 className="text-gray-700   mx-auto">
 				limited contact & <br className="xl:hidden " /> payment options
 			</h1>
 			<div className="grid text-xs" id="table">
@@ -97,10 +97,10 @@ const Options = () => {
 					</div>
 				</div>
 				<div className="flex items-center justify-center py-3">
-					<img src={check} className="w-12 md:w-20" alt="" />
+					<img src={check} className="w-12 md:w-16" alt="" />
 				</div>
 				<div className="flex items-center justify-center">
-					<img src={check} className="w-12 md:w-20" alt="" />
+					<img src={check} className="w-12 md:w-16" alt="" />
 				</div>
 				<div className="flex  gap-2 md:grid row items-center p-1 justify-center">
 					<div className="hidden md:block text-3xl font-extrabold text-brandRed uppercase leading-7 mx-4 ">
@@ -109,7 +109,7 @@ const Options = () => {
 					<div className="flex items-center gap-4 ">
 						<img src={bag} className="w-16 sm:w-24" alt="" />
 						<div>
-							<p className="uppercase text-xs md:text-base font-bold border">
+							<p className="uppercase text-xs md:text-base font-bold">
 								Limited contact delivery now available. Our delivery packaging is
 								sealed and double checked.
 							</p>
@@ -118,10 +118,10 @@ const Options = () => {
 				</div>
 
 				<div className="flex items-center justify-center">
-					<img src={check} className="w-12 md:w-20" alt="" />
+					<img src={check} className="w-12 md:w-16" alt="" />
 				</div>
 				<div className="flex items-center justify-center">
-					<img src={check} className="w-12 md:w-20" alt="" />
+					<img src={check} className="w-12 md:w-16" alt="" />
 				</div>
 				<div className="flex items-center overflow-hidden md:grid row2">
 					<div className="hidden md:block text-3xl font-extrabold text-brandRed uppercase leading-7 mx-4 whitespace-nowrap mr-10">
@@ -131,7 +131,7 @@ const Options = () => {
 				</div>
 
 				<div className="flex items-center justify-center">
-					<img src={check} className="w-12 md:w-20" alt="" />
+					<img src={check} className="w-12 md:w-16" alt="" />
 				</div>
 				<div />
 			</div>

@@ -66,18 +66,14 @@ const StyledHeader = styled.div`
 				top: 72px;
 				right: ${(props) => (props.open ? '0' : '-100%')};
 				max-width: 100%;
-				border-bottom: 1px solid gray;
 				transition: right .25s;
 				transition-delay: .25s;
 				background-color: #fff;
 				z-index: 1000;
 				color: var(--muted);
 				overflow-y: scroll;
-				height: min-content;
 				border-bottom: 1px solid lightgray;
 				.listItem {
-					/* opacity: .9; */
-					/* border: 2px solid red; */
 					width: 100%;
 					text-align: center;
 					padding: 1rem;
@@ -108,7 +104,6 @@ const StyledHeader = styled.div`
 			font-weight: 800;
 
 			padding: 3px;
-			/* background-color: red; */
 			color: white;
 			line-height: 1.4;
 			display: flex;
@@ -230,7 +225,7 @@ const Header = () => {
 								<span />
 								<span />
 							</div>
-							<div id="menu" className="pt-6 pb-5 px-12">
+							<div id="menu" className="pt-6 pb-5 px-8">
 								<ul className="flex flex-col items-center justify-center uppercase font-bold">
 									{bottomLinks.map((link, i) => (
 										<li key={i} className="listItem">
@@ -238,9 +233,9 @@ const Header = () => {
 										</li>
 									))}
 								</ul>
-								<ul className="flex items-center justify-between capitalize  mx-6 text-brandRed font-medium text-sm mt-6">
+								<ul className="flex items-center justify-between capitalize text-brandRed font-medium text-sm mt-6">
 									{topLinks.map((link, i) => (
-										<li key={i} className="hover:underline">
+										<li key={i} className="hover:underline whitespace-nowrap">
 											{link}
 										</li>
 									))}
